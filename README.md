@@ -73,4 +73,32 @@ Output is generated as sets of [Apache Parquet](https://parquet.apache.org/) fil
 
 ## Dataset location
 
-TBD
+Dataset is available on S3 with requester-pays flag set. This means that you will need to pay for the network bandwidth consumed during the download process. This is generally only an issue if you are transferring data out of AWS. The estimated cost as calculated mid October 2020 was between $3.60 and $6.00 depending on your AWS usage.
+
+The dataset is also registered on [Mendeley](https://data.mendeley.com/datasets/gk9njn3pth/2) as "CORD-19 SciSpaCy Entity Dataset". If you find this dataset useful in your research, please cite it as: 
+
+> Pal, Sujit (2020), “CORD-19 SciSpaCy Entity Dataset”, Mendeley Data, V2, doi: 10.17632/gk9njn3pth.2.
+
+You can access the data on S3 [here](https://s3.console.aws.amazon.com/s3/buckets/els-saturn-scispacy/cord19-scispacy-entities/?region=us-east-1&tab=overview) using the AWS console. Equivalently, you can use the following AWS CLI commands to view the top level directory structure, and corresponding `aws cp` commands with the `--recursive` option to copy the files to their own area.
+
+```
+$ aws s3 ls s3://els-saturn-scispacy/cord19-scispacy-entities/ --request-payer requester
+             PRE 2020-08-28-small/
+             PRE 2020-08-28/
+             PRE 2020-09-28/
+
+$ aws s3 ls s3://els-saturn-scispacy/cord19-scispacy-entities/2020-08-28/ --request-payer requester
+             PRE cord19-ents-bc5cdr-pq/
+             PRE cord19-ents-bionlp-pq/
+             PRE cord19-ents-craft-pq/
+             PRE cord19-ents-go-pq/
+             PRE cord19-ents-hpo-pq/
+             PRE cord19-ents-jnlpba-pq/
+             PRE cord19-ents-mesh-pq/
+             PRE cord19-ents-rxnorm-pq/
+             PRE cord19-ents-umls-pq/
+             PRE cord19-paras-pq/
+             PRE cord19-sents-pq/
+
+```
+
